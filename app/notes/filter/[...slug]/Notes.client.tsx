@@ -35,12 +35,14 @@ export default function NotesClient({ tag = '', initialData }: Props) {
     setPage(1);
   }, 500);
 
-  const { data } = useQuery<FetchNotesResponse>({
-    queryKey: ['notes', debouncedSearch, safeTag, page],
-    queryFn: () => fetchNotes(debouncedSearch, page, safeTag),
-    initialData,
-    staleTime: 1000 * 60 * 5,
-  });
+const { data } = useQuery<FetchNotesResponse>({
+  queryKey: ['notes', debouncedSearch, safeTag, page],
+  queryFn: () => fetchNotes(debouncedSearch, page, safeTag),
+  initialData,
+  placeholderData: (prev) => prev ?? initialData,
+  staleTime: 1000 * 60 * 5,
+});
+
 
   return (
     <>
@@ -76,8 +78,3 @@ export default function NotesClient({ tag = '', initialData }: Props) {
     </>
   );
 }
-
-
-
-
-
