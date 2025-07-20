@@ -1,7 +1,9 @@
+// app/notes/[id]/page.tsx або аналогічний файл у Next.js
+
 import { getSingleNote } from '@/lib/api';
 import { QueryClient, dehydrate, HydrationBoundary } from '@tanstack/react-query';
-import NotePreview from '@/app/@modal/(.)notes/[id]/NotePreview.client';
 import { notFound } from 'next/navigation';
+import NotePreview from '@/components/NotePreview/NotePreview';
 
 interface Props {
   params: { id: string };
@@ -27,5 +29,3 @@ export default async function NotePage({ params }: Props) {
     </HydrationBoundary>
   );
 }
-
-
